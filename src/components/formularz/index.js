@@ -1,7 +1,6 @@
 import React from "react";
 
 const wordPattern = /^[a-zA-Z]+$/;
-const nameInput = document.getElementById("nameInput");
 
 
 class Form extends React.Component {
