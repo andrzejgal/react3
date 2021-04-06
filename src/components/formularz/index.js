@@ -15,6 +15,7 @@ class Form extends React.Component {
         this.inputRefStr = React.createRef();
         this.inputRefHp = React.createRef();
         this.inputRefSpeed = React.createRef();
+        localStorage.clear();
     };
 
 
@@ -33,13 +34,11 @@ class Form extends React.Component {
 
 
     writeToLocalStorage() {
-        localStorage.setItem('name',this.inputRefName.current.value);
-        let vv=this.inputRefStr.current.value/*.toString()*/;
-        localStorage.setItem('str', vv);
-        vv=this.inputRefHp.current.value.toString();
-        localStorage.setItem('hp', vv);
-        vv=this.inputRefSpeed.current.value.toString();
-        localStorage.setItem('speed', vv);
+        localStorage.setItem('name', this.inputRefName.current.value);
+        localStorage.setItem('str', this.inputRefStr.current.value);
+        localStorage.setItem('hp', this.inputRefHp.current.value);
+        localStorage.setItem('speed', this.inputRefSpeed.current.value);
+        localStorage.setItem('validity', 'true');
 
     }
 
@@ -50,10 +49,11 @@ class Form extends React.Component {
     handleSubmit(e) {
         console.log(e);
         e.preventDefault();
-        if (this.CheckValidity(e, this.inputRefName.current, wordPattern, "Pole może zawierać tylko litery"))
-{
-    this.writeToLocalStorage();
-}
+        if (this.CheckValidity(e, this.inputRefName.current, wordPattern, "Pole może zawierać tylko litery")) {
+            this.writeToLocalStorage();
+        }
+        else     {    localStorage.setItem('validity','false'); }
+
 
     }
     render() {
@@ -65,15 +65,15 @@ class Form extends React.Component {
                 </div>
                 <div>
                     <label>Siła:</label>
-                    <input name="str" type="text" ref={this.inputRefStr} value={generateRandom()}  />
+                    <input name="str" type="text" ref={this.inputRefStr} value={generateRandom()} readOnly />
                 </div>
                 <div>
                     <label>Moc:</label>
-                    <input name="hp" type="text" ref={this.inputRefHp} placeholder={generateRandom()} />
+                    <input name="hp" type="text" ref={this.inputRefHp} value={generateRandom()} readOnly />
                 </div>
                 <div>
                     <label>Prędkość:</label>
-                    <input name="speed" type="text" ref={this.inputRefSpeed} placeholder={generateRandom()} />
+                    <input name="speed" type="text" ref={this.inputRefSpeed} value={generateRandom()} readOnly />
                 </div>
                 <div>
                     <input name="send" type="submit" />
