@@ -11,10 +11,10 @@ class Form extends React.Component {
         };
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
-        this.inputRefName=React.createRef();
-        this.inputRefStr=React.createRef();
-        this.inputRefHp=React.createRef();
-        this.inputRefSpeed=React.createRef();
+        this.inputRefName = React.createRef();
+        this.inputRefStr = React.createRef();
+        this.inputRefHp = React.createRef();
+        this.inputRefSpeed = React.createRef();
     };
 
 
@@ -29,17 +29,32 @@ class Form extends React.Component {
             element.setCustomValidity("");
             return true;
         }
+    }
+
+
+    writeToLocalStorage() {
+        localStorage.setItem('name',this.inputRefName.current.value);
+        let vv=this.inputRefStr.current.value/*.toString()*/;
+        localStorage.setItem('str', vv);
+        vv=this.inputRefHp.current.value.toString();
+        localStorage.setItem('hp', vv);
+        vv=this.inputRefSpeed.current.value.toString();
+        localStorage.setItem('speed', vv);
 
     }
 
-handleChange(e) {
-    this.setState({name:e.target.value});
-}
+    handleChange(e) {
+        this.setState({ name: e.target.value });
+    }
 
     handleSubmit(e) {
         console.log(e);
         e.preventDefault();
-        this.CheckValidity(e, this.inputRefName.current, wordPattern, "Pole może zawierać tylko litery");
+        if (this.CheckValidity(e, this.inputRefName.current, wordPattern, "Pole może zawierać tylko litery"))
+{
+    this.writeToLocalStorage();
+}
+
     }
     render() {
         return (
@@ -50,7 +65,7 @@ handleChange(e) {
                 </div>
                 <div>
                     <label>Siła:</label>
-                    <input name="str" type="text" ref={this.inputRefStr} placeholder={generateRandom()} />
+                    <input name="str" type="text" ref={this.inputRefStr} value={generateRandom()}  />
                 </div>
                 <div>
                     <label>Moc:</label>
