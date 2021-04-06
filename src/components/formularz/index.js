@@ -11,7 +11,10 @@ class Form extends React.Component {
         };
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
-        this.inputRef=React.createRef();
+        this.inputRefName=React.createRef();
+        this.inputRefStr=React.createRef();
+        this.inputRefHp=React.createRef();
+        this.inputRefSpeed=React.createRef();
     };
 
 
@@ -36,26 +39,26 @@ handleChange(e) {
     handleSubmit(e) {
         console.log(e);
         e.preventDefault();
-        this.CheckValidity(e, this.inputRef.current, wordPattern, "Pole może zawierać tylko litery");
+        this.CheckValidity(e, this.inputRefName.current, wordPattern, "Pole może zawierać tylko litery");
     }
     render() {
         return (
             <form onSubmit={this.handleSubmit}>
                 <div>
                     <label>Imię:</label>
-                    <input name="name" type="text" ref={this.inputRef} value={this.state.name} onChange={this.handleChange} />
+                    <input name="name" type="text" ref={this.inputRefName} value={this.state.name} onChange={this.handleChange} />
                 </div>
                 <div>
                     <label>Siła:</label>
-                    <input name="str" type="text" placeholder={generateRandom()} />
+                    <input name="str" type="text" ref={this.inputRefStr} placeholder={generateRandom()} />
                 </div>
                 <div>
                     <label>Moc:</label>
-                    <input name="hp" type="text" placeholder={generateRandom()} />
+                    <input name="hp" type="text" ref={this.inputRefHp} placeholder={generateRandom()} />
                 </div>
                 <div>
                     <label>Prędkość:</label>
-                    <input name="speed" type="text" placeholder={generateRandom()} />
+                    <input name="speed" type="text" ref={this.inputRefSpeed} placeholder={generateRandom()} />
                 </div>
                 <div>
                     <input name="send" type="submit" />
