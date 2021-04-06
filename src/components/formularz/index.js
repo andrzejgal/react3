@@ -1,51 +1,66 @@
 import React from "react";
 
+const wordPattern = /^[a-zA-Z]+$/;
+const nameInput = document.getElementById("nameInput");
 
 
 class Form extends React.Component {
-    constructor(props) {    
+    constructor(props) {
         super(props);
         this.state = {
             name: 'Andrzej',
-            str: generateRandom(),
-            hp: generateRandom(),
-            speed: generateRandom(),
         };
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.inputRef=React.createRef();
+    };
+
+
+    CheckValidity(event, element, pattern, customMessage) {
+        if (element.value.match(pattern) == null) {
+            event.preventDefault();
+            element.setCustomValidity(customMessage);
+            element.reportValidity();
+            return false;
+        }
+        else {
+            element.setCustomValidity("");
+            return true;
+        }
+
     }
-    handleChange(e) {
-        this.setState({ name: e.target.value });
-    }
+
+handleChange(e) {
+    this.setState({name:e.target.value});
+}
 
     handleSubmit(e) {
         console.log(e);
-        e.preventDefault()
+        e.preventDefault();
+        this.CheckValidity(e, this.inputRef.current, wordPattern, "Pole może zawierać tylko litery");
     }
     render() {
         return (
             <form onSubmit={this.handleSubmit}>
-                <table>
-                    <tr>
-                        <td><label>Imię:</label></td>
-                        <td><input name="name" type="text" value={this.state.name} onChange={this.handleChange} /></td>
-                    </tr>
-                    <tr>
-                        <td><label>Siła:</label></td>
-                        <td><input name="str" type="text" value={this.state.str} /></td>
-                    </tr>
-                    <tr>
-                        <td><label>Moc:</label></td>
-                        <td><input name="hp" type="text" value={this.state.hp} /></td>
-                    </tr>
-                    <tr>
-                        <td><label>Prędkość:</label></td>
-                        <td><input name="speed" type="text" value={this.state.speed} /></td>
-                    </tr>
-                    <tr>
-                        <input name="send" type="submit" />
-                    </tr>
-                </table>
+                <div>
+                    <label>Imię:</label>
+                    <input name="name" type="text" ref={this.inputRef} value={this.state.name} onChange={this.handleChange} />
+                </div>
+                <div>
+                    <label>Siła:</label>
+                    <input name="str" type="text" placeholder={generateRandom()} />
+                </div>
+                <div>
+                    <label>Moc:</label>
+                    <input name="hp" type="text" placeholder={generateRandom()} />
+                </div>
+                <div>
+                    <label>Prędkość:</label>
+                    <input name="speed" type="text" placeholder={generateRandom()} />
+                </div>
+                <div>
+                    <input name="send" type="submit" />
+                </div>
             </form>
         )
     }
@@ -57,5 +72,19 @@ function generateRandom() { //between 0 and 100
     return Math.floor(max * Math.random());
 
 }
+
+
+
+
+// nameValidation = (fieldName, fieldValue) => {
+//     if (fieldValue.trim() === '') {
+//       return {fieldName} +"nie może byc puste";
+//     }
+//     if (/[^a-zA-Z -]/.test(fieldValue)) {
+//       return "Imię może zawierać tylko litery";
+//     }
+//     return null;
+//   };
+
 
 export default Form;
