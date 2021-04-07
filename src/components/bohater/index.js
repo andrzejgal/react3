@@ -1,5 +1,10 @@
 import React from 'react';
 
-class Bohater extends React.Component {
-    
+const Bohater=(props)=> {
+    constructor(props) {
+        super(props);
+        this.state={show:false};
+    }
+
 }
+
