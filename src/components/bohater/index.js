@@ -1,16 +1,33 @@
-import React from 'react';
+import React, { useState } from 'react';
 
-const Bohater=()=> {
-    const { name, str, hp, speed} = useContext(CharsStats);
+var validity;
+
+const readFromLocalStorage = () => {
+    let validity = localStorage.getItem("validity");
+    str = localStorage.getItem("str");
+    const hp = localStorage.getItem("hp");
+    const speed = localStorage.getItem("speed");
+
+}
+
+
+const Bohater = () => {
+    // const { name, str, hp, speed} = useContext(CharsStats);
+    [validity, setValidity] = setState(false);
+    readFromLocalStorage();
     return (
-            <div >
-                {/* <h1>{props.poziom}</h1> */}
-                <p>Name: {name}</p>
-                <p>Str: {str}</p>
-                <p>hp" {hp}</p>
-                <p>speed: {speed}</p>
-             </div>
+        {
+            validity ?
+                <div>
+                < p > Name: { localStorage.getItem("name"); }</p >
+                <p>Str: { localStorage.getItem("str"); }</p>
+                <p>hp:{ localStorage.getItem("hp"); }</p>
+                <p>speed: { localStorage.getItem("speed"); }</p>
+             </div >
+             : <div>to formularz</div>
+        }
         )
+
     
 
 }
