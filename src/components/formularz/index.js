@@ -1,4 +1,5 @@
 import React from "react";
+import Bohater from './../bohater';
 
 const wordPattern = /^[a-zA-Z]+$/;
 
@@ -80,6 +81,7 @@ class Form extends React.Component {
                 </div>
             </form>
         )
+        {Bohater}
     }
 }
 
