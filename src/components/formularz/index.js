@@ -1,11 +1,12 @@
 import React from "react";
 import Bohater from './../bohater';
 
+
 const wordPattern = /^[a-zA-Z]+$/;
 
-const getSubmitResult=(val)=>   {
-    return val;
-} 
+var submitResult = false;
+
+
 
 
 
@@ -25,6 +26,7 @@ class Form extends React.Component {
     };
 
 
+
     CheckValidity(event, element, pattern, customMessage) {
         if (element.value.match(pattern) == null) {
             event.preventDefault();
@@ -37,6 +39,7 @@ class Form extends React.Component {
             return true;
         }
     }
+
 
 
     writeToLocalStorage() {
@@ -53,16 +56,15 @@ class Form extends React.Component {
     }
 
     handleSubmit(e) {
-        console.log(e);
         e.preventDefault();
-        let wae=this.CheckValidity(e, this.inputRefName.current, wordPattern, "Pole może zawierać tylko litery");
-        getSubmitResult();
-        if (wae) {
+        submitResult = this.CheckValidity(e, this.inputRefName.current, wordPattern, "Pole może zawierać tylko litery");
+        { console.log('bohater ', submitResult)}
+        if (submitResult) {
             this.writeToLocalStorage();
         }
         else { localStorage.setItem('validity', 'false'); }
-    
-       
+
+
 
 
     }
@@ -70,30 +72,39 @@ class Form extends React.Component {
 
     render() {
         return (
-            <form onSubmit={this.handleSubmit}>
-                <div>
-                    <label>Imię:</label>
-                    <input name="name" type="text" ref={this.inputRefName} value={this.state.name} onChange={this.handleChange} />
-                </div>
-                <div>
-                    <label>Siła:</label>
-                    <input name="str" type="text" ref={this.inputRefStr} value={generateRandom()} readOnly />
-                </div>
-                <div>
-                    <label>Moc:</label>
-                    <input name="hp" type="text" ref={this.inputRefHp} value={generateRandom()} readOnly />
-                </div>
-                <div>
-                    <label>Prędkość:</label>
-                    <input name="speed" type="text" ref={this.inputRefSpeed} value={generateRandom()} readOnly />
-                </div>
-                <div>
-                    <input name="send" type="submit" />
-                </div>
-            </form>
+
+            <div>
+
+                <form onSubmit={this.handleSubmit}>
+                    <div>
+                        <label>Imię:</label>
+                        <input name="name" type="text" ref={this.inputRefName} value={this.state.name} onChange={this.handleChange} />
+                    </div>
+                    <div>
+                        <label>Siła:</label>
+                        <input name="str" type="text" ref={this.inputRefStr} value={generateRandom()} readOnly />
+                    </div>
+                    <div>
+                        <label>Moc:</label>
+                        <input name="hp" type="text" ref={this.inputRefHp} value={generateRandom()} readOnly />
+                    </div>
+                    <div>
+                        <label>Prędkość:</label>
+                        <input name="speed" type="text" ref={this.inputRefSpeed} value={generateRandom()} readOnly />
+                    </div>
+                    <div>
+                        <input name="send" type="submit" />
+                    </div>
+                </form>
+                {console.log('linia 99',submitResult)}
+                <Bohater validity={submitResult }/>
+            </div>
         )
+
+
+
     }
-   
+
 }
 
 function generateRandom() { //between 0 and 100
