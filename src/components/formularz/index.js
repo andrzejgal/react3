@@ -3,6 +3,11 @@ import Bohater from './../bohater';
 
 const wordPattern = /^[a-zA-Z]+$/;
 
+const getSubmitResult=(val)=>   {
+    return val;
+} 
+
+
 
 class Form extends React.Component {
     constructor(props) {
@@ -50,13 +55,19 @@ class Form extends React.Component {
     handleSubmit(e) {
         console.log(e);
         e.preventDefault();
-        if (this.CheckValidity(e, this.inputRefName.current, wordPattern, "Pole może zawierać tylko litery")) {
+        let wae=this.CheckValidity(e, this.inputRefName.current, wordPattern, "Pole może zawierać tylko litery");
+        getSubmitResult();
+        if (wae) {
             this.writeToLocalStorage();
         }
-        else     {    localStorage.setItem('validity','false'); }
+        else { localStorage.setItem('validity', 'false'); }
+    
+       
 
 
     }
+
+
     render() {
         return (
             <form onSubmit={this.handleSubmit}>
@@ -81,8 +92,8 @@ class Form extends React.Component {
                 </div>
             </form>
         )
-        {Bohater}
     }
+   
 }
 
 function generateRandom() { //between 0 and 100
