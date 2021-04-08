@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 
-var validity;
+// var validity;
 
-const readFromLocalStorage = () => {
-    let validity = localStorage.getItem("validity");
-    str = localStorage.getItem("str");
-    const hp = localStorage.getItem("hp");
-    const speed = localStorage.getItem("speed");
+// const readFromLocalStorage = () => {
+//     let validity = localStorage.getItem("validity");
+//     str = localStorage.getItem("str");
+//     const hp = localStorage.getItem("hp");
+//     const speed = localStorage.getItem("speed");
 
 }
 
@@ -14,7 +14,6 @@ const readFromLocalStorage = () => {
 const Bohater = () => {
     // const { name, str, hp, speed} = useContext(CharsStats);
     [validity, setValidity] = setState(false);
-    readFromLocalStorage();
     return (
         {
             validity ?
@@ -26,7 +25,7 @@ const Bohater = () => {
              </div >
              : <div>to formularz</div>
         }
-        )
+)
 
     
 
