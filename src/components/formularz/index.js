@@ -2,7 +2,7 @@ import React from "react";
 import Bohater from './../bohater';
 
 
-const wordPattern = /^([a-zA-Z])+$/;
+const wordPattern = /^([a-zA-Z0-9])+$/;
 
 //var submitResult=false;
 
@@ -24,6 +24,7 @@ class Form extends React.Component {
         this.inputRefHp = React.createRef();
         this.inputRefSpeed = React.createRef();
         this.submitResult = false;
+        this.inputValues=[];
 
                 localStorage.clear();
     };
@@ -32,8 +33,7 @@ class Form extends React.Component {
 
     CheckValidity(event, element, pattern, customMessage) {
         if (element.value.match(pattern) == null) {
- //           event.preventDefault();
-            element.setCustomValidity(customMessage);
+             element.setCustomValidity(customMessage);
             element.reportValidity();
             return false;
         }
@@ -64,6 +64,10 @@ class Form extends React.Component {
         this.setState({validity: this.submitResult});
         if (this.submitResult) {
             this.writeToLocalStorage();
+            this.inputValues.push(this.inputRefName.current.value);
+            this.inputValues.push(this.inputRefStr.current.value);
+            this.inputValues.push(this.inputRefHp.current.value);
+            this.inputValues.push(this.inputRefSpeed.current.value);
         }
         else { localStorage.setItem('validity', 'false'); }
     }
@@ -95,8 +99,8 @@ class Form extends React.Component {
                         <input name="send" type="submit" />
                     </div>
                 </form>
-                <p>validity: {this.state.validity.toString()}</p>
-                <Bohater validity={this.state.validity} />
+                {/* <p>validity: {this.state.validity.toString()}</p> */}
+                 <Bohater  {inputValues=this.inputValues} /> 
             </div>
         )
 
