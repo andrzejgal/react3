@@ -1,18 +1,7 @@
-import React,{useState} from 'react';
+import React from 'react';
 
-// var validity;
-
-// const readFromLocalStorage = () => {
-//     let validity = localStorage.getItem("validity");
-//     str = localStorage.getItem("str");
-//     const hp = localStorage.getItem("hp");
-//     const speed = localStorage.getItem("speed");
 
 const Bohater = (props) => {
-    // const [validity,setValidity]=useState(true);
-    // setValidity=()=>{validity=props.validity};
-    // convertToBool(props)
-    // const name=localStorage.getItem("name");
     let validity=props.validity;
 const str=localStorage.getItem("str");
     return (
