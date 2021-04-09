@@ -25,13 +25,14 @@ class Form extends React.Component {
         this.inputRefSpeed = React.createRef();
         this.submitResult = false;
         this.inputValues=[];
+        this.name="";
 
                 localStorage.clear();
     };
 
 
 
-    CheckValidity(event, element, pattern, customMessage) {
+    CheckValidity(event,element, pattern, customMessage) {
         if (element.value.match(pattern) == null) {
              element.setCustomValidity(customMessage);
             element.reportValidity();
@@ -44,9 +45,9 @@ class Form extends React.Component {
     }
 
 
-
+    // this.inputRefName.current.value
     writeToLocalStorage() {
-        localStorage.setItem('name', this.inputRefName.current.value);
+        localStorage.setItem('name', this.state.name);
         localStorage.setItem('str', this.inputRefStr.current.value);
         localStorage.setItem('hp', this.inputRefHp.current.value);
         localStorage.setItem('speed', this.inputRefSpeed.current.value);
@@ -56,19 +57,23 @@ class Form extends React.Component {
 
     handleChange(e) {
         this.setState({ name: e.target.value });
+//        this.name=e.target.value;
     }
 
     handleSubmit(e) {
         e.preventDefault();
         this.submitResult = this.CheckValidity(e, this.inputRefName.current, wordPattern, "Pole może zawierać tylko litery");
-        this.setState({validity: this.submitResult});
+//        this.state.validity=this.submitResult;
+                this.setState({
+           validity: this.submitResult
+       });
         if (this.submitResult) {
             this.writeToLocalStorage();
-            this.inputValues.push(this.inputRefName.current.value);
+            this.inputValues.push(this.state.name);
             this.inputValues.push(this.inputRefStr.current.value);
             this.inputValues.push(this.inputRefHp.current.value);
             this.inputValues.push(this.inputRefSpeed.current.value);
-            this.inputValues.push(this.state.validity);
+            this.inputValues.push(this.submitResult);
         }
         else { localStorage.setItem('validity', 'false'); }
     }
@@ -100,8 +105,11 @@ class Form extends React.Component {
                         <input name="send" type="submit" />
                     </div>
                 </form>
-                {/* <p>validity: {this.state.validity.toString()}</p> */}
-                 <Bohater  {"inputs"=this.inputValues} /> 
+                 <p>validity: {this.inputValues.toString()}</p> 
+                 {console.log('linia104',this.inputValues)}
+                 <Bohater  inputs={this.inputValues} /> 
+                 {/* {this.submitResult = false} */}
+                 {this.inputValues=[]}
             </div>
         )
 
