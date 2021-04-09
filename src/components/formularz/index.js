@@ -68,6 +68,7 @@ class Form extends React.Component {
             this.inputValues.push(this.inputRefStr.current.value);
             this.inputValues.push(this.inputRefHp.current.value);
             this.inputValues.push(this.inputRefSpeed.current.value);
+            this.inputValues.push(this.state.validity);
         }
         else { localStorage.setItem('validity', 'false'); }
     }
@@ -100,7 +101,7 @@ class Form extends React.Component {
                     </div>
                 </form>
                 {/* <p>validity: {this.state.validity.toString()}</p> */}
-                 <Bohater  {inputValues=this.inputValues} /> 
+                 <Bohater  {"inputs"=this.inputValues} /> 
             </div>
         )
 
