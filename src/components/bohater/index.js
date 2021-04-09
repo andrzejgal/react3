@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useState} from 'react';
 
 // var validity;
 
@@ -9,17 +9,19 @@ import React from 'react';
 //     const speed = localStorage.getItem("speed");
 
 const Bohater = (props) => {
-//    const [validity,setValidity]=useState(true);
+    // const [validity,setValidity]=useState(true);
+    // setValidity=()=>{validity=props.validity};
     // convertToBool(props)
     // const name=localStorage.getItem("name");
     let validity=props.validity;
+const str=localStorage.getItem("str");
     return (
         <div>
             {
                 validity ?
                     <div>
                         < p > Name: "Andrzej"</p >
-                        <p>Str: {localStorage.getItem("str")}</p>
+                        <p>Str: {str}</p>
                         <p>hp:{localStorage.getItem("hp")}</p>
                         <p>speed: {localStorage.getItem("speed")}</p>
                     </div >
