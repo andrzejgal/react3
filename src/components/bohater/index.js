@@ -1,12 +1,24 @@
 import React from 'react';
 
+const convert=(wej)=> {
+    if (wej) return "true";else return "false";
+}
 
 const Bohater = (props) => {
 //    let validity=props.validity
 //const str=localStorage.getItem("str");
-let name,str,hp,speed,validity=[...props.inputs];
+//console.log("props",props);
+//let name,str,hp,speed,validity;
+const [ name,str,hp,speed,validity]=props.inputs;
+console.log("validity: ",validity);
     return (
         <div>
+            {/* <p>name:{name}</p>
+            <p>str:{str}</p>
+            <p>hp:{hp}</p>
+            <p>speed:{speed}</p>
+            <p>validity: {convert(validity)}</p>
+            <p>koniec desktrukturyzacj</p> */}
             {
                 validity ?
                     <div>
@@ -17,6 +29,7 @@ let name,str,hp,speed,validity=[...props.inputs];
                     </div >
                     : <div>to formularz</div>
             }</div>
+            // </div>
     )
 
 
