@@ -4,7 +4,7 @@ import Bohater from './../bohater';
 
 const wordPattern = /^[a-zA-Z]+$/;
 
-var submitResult = false;
+//var submitResult=false;
 
 
 
@@ -15,14 +15,16 @@ class Form extends React.Component {
         super(props);
         this.state = {
             name: 'Andrzej',
-        };
+            };
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.inputRefName = React.createRef();
         this.inputRefStr = React.createRef();
         this.inputRefHp = React.createRef();
         this.inputRefSpeed = React.createRef();
-        localStorage.clear();
+        this.submitResult=false;
+
+//        localStorage.clear();
     };
 
 
@@ -57,16 +59,12 @@ class Form extends React.Component {
 
     handleSubmit(e) {
         e.preventDefault();
-        submitResult = this.CheckValidity(e, this.inputRefName.current, wordPattern, "Pole może zawierać tylko litery");
-        { console.log('bohater ', submitResult)}
-        if (submitResult) {
+        this.submitResultsubmitResult = this.CheckValidity(e, this.inputRefName.current, wordPattern, "Pole może zawierać tylko litery");
+        { console.log('bohater ', this.submitResult)}
+        if (this.submitResult) {
             this.writeToLocalStorage();
         }
         else { localStorage.setItem('validity', 'false'); }
-
-
-
-
     }
 
 
@@ -96,8 +94,8 @@ class Form extends React.Component {
                         <input name="send" type="submit" />
                     </div>
                 </form>
-                {console.log('linia 99',submitResult)}
-                <Bohater validity={submitResult }/>
+                {console.log('linia 97',this.submitResult)}
+                <Bohater validity={this.submitResult }/>
             </div>
         )
 
