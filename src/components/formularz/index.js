@@ -2,7 +2,7 @@ import React from "react";
 import Bohater from './../bohater';
 
 
-const wordPattern = /^[a-zA-Z]+$/;
+const wordPattern = /^([a-zA-Z])+$/;
 
 //var submitResult=false;
 
@@ -32,7 +32,7 @@ class Form extends React.Component {
 
     CheckValidity(event, element, pattern, customMessage) {
         if (element.value.match(pattern) == null) {
-            event.preventDefault();
+ //           event.preventDefault();
             element.setCustomValidity(customMessage);
             element.reportValidity();
             return false;
@@ -61,8 +61,7 @@ class Form extends React.Component {
     handleSubmit(e) {
         e.preventDefault();
         this.submitResult = this.CheckValidity(e, this.inputRefName.current, wordPattern, "Pole może zawierać tylko litery");
-        this.setState({validity: true});
-//        { console.log('bohater ', this.submitResult) }
+        this.setState({validity: this.submitResult});
         if (this.submitResult) {
             this.writeToLocalStorage();
         }
@@ -96,7 +95,7 @@ class Form extends React.Component {
                         <input name="send" type="submit" />
                     </div>
                 </form>
-                {console.log('linia 97', this.state.validity)}
+                <p>validity: {this.state.validity.toString()}</p>
                 <Bohater validity={this.state.validity} />
             </div>
         )
