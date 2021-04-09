@@ -2,17 +2,18 @@ import React from 'react';
 
 
 const Bohater = (props) => {
-    let validity=props.validity;
-const str=localStorage.getItem("str");
+//    let validity=props.validity
+//const str=localStorage.getItem("str");
+let name,str,hp,speed,validity=[...props.inputs];
     return (
         <div>
             {
                 validity ?
                     <div>
-                        < p > Name: "Andrzej"</p >
+                        < p > Name: {name}</p >
                         <p>Str: {str}</p>
-                        <p>hp:{localStorage.getItem("hp")}</p>
-                        <p>speed: {localStorage.getItem("speed")}</p>
+                        <p>hp: {hp}</p>
+                        <p>speed: {speed}</p>
                     </div >
                     : <div>to formularz</div>
             }</div>
