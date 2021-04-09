@@ -15,16 +15,17 @@ class Form extends React.Component {
         super(props);
         this.state = {
             name: 'Andrzej',
-            };
+            validity: false
+        };
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.inputRefName = React.createRef();
         this.inputRefStr = React.createRef();
         this.inputRefHp = React.createRef();
         this.inputRefSpeed = React.createRef();
-        this.submitResult=false;
+        this.submitResult = false;
 
-//        localStorage.clear();
+                localStorage.clear();
     };
 
 
@@ -59,8 +60,9 @@ class Form extends React.Component {
 
     handleSubmit(e) {
         e.preventDefault();
-        this.submitResultsubmitResult = this.CheckValidity(e, this.inputRefName.current, wordPattern, "Pole może zawierać tylko litery");
-        { console.log('bohater ', this.submitResult)}
+        this.submitResult = this.CheckValidity(e, this.inputRefName.current, wordPattern, "Pole może zawierać tylko litery");
+        this.setState({validity: true});
+//        { console.log('bohater ', this.submitResult) }
         if (this.submitResult) {
             this.writeToLocalStorage();
         }
@@ -94,8 +96,8 @@ class Form extends React.Component {
                         <input name="send" type="submit" />
                     </div>
                 </form>
-                {console.log('linia 97',this.submitResult)}
-                <Bohater validity={this.submitResult }/>
+                {console.log('linia 97', this.state.validity)}
+                <Bohater validity={this.state.validity} />
             </div>
         )
 
