@@ -33,7 +33,7 @@ class Form extends React.Component {
 
 
     CheckValidity(event,element, pattern, customMessage) {
-        if (element.value.match(pattern) == null) {
+        if (/*element.value*/this.state.name.match(pattern) == null) {
              element.setCustomValidity(customMessage);
             element.reportValidity();
             return false;
@@ -51,14 +51,18 @@ class Form extends React.Component {
 //        this.name=e.target.value;
     }
 
+    // 
     handleSubmit(e) {
         e.preventDefault();
-        this.submitResult = this.CheckValidity(e, this.inputRefName.current, wordPattern, "Pole może zawierać tylko litery");
+        this.submitResult=true;
+        if (this.state.name==="") this.submitResult=false;
+//        this.submitResult = this.CheckValidity(e,this.inputRefName.current , wordPattern, "Pole może zawierać tylko litery");
                 this.setState({
            validity: this.submitResult
        });
 
-        if (this.submitResult) {
+//        if (this.submitResult) {
+    if (this.state.validity) {
             this.inputValues.push(this.state.name);
             this.inputValues.push(this.inputRefStr.current.value);
             this.inputValues.push(this.inputRefHp.current.value);
