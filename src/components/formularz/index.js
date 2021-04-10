@@ -45,15 +45,6 @@ class Form extends React.Component {
     }
 
 
-    // this.inputRefName.current.value
-    writeToLocalStorage() {
-        localStorage.setItem('name', this.state.name);
-        localStorage.setItem('str', this.inputRefStr.current.value);
-        localStorage.setItem('hp', this.inputRefHp.current.value);
-        localStorage.setItem('speed', this.inputRefSpeed.current.value);
-        localStorage.setItem('validity', 'true');
-
-    }
 
     handleChange(e) {
         this.setState({ name: e.target.value });
@@ -63,19 +54,17 @@ class Form extends React.Component {
     handleSubmit(e) {
         e.preventDefault();
         this.submitResult = this.CheckValidity(e, this.inputRefName.current, wordPattern, "Pole może zawierać tylko litery");
-//        this.state.validity=this.submitResult;
                 this.setState({
            validity: this.submitResult
        });
+
         if (this.submitResult) {
-            this.writeToLocalStorage();
             this.inputValues.push(this.state.name);
             this.inputValues.push(this.inputRefStr.current.value);
             this.inputValues.push(this.inputRefHp.current.value);
             this.inputValues.push(this.inputRefSpeed.current.value);
             this.inputValues.push(this.submitResult);
         }
-        else { localStorage.setItem('validity', 'false'); }
     }
 
 
