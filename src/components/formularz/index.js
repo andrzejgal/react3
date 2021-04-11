@@ -52,7 +52,7 @@ class Form extends React.Component {
             validity: this.submitResult
         });
 
-        if (this.state.validity) {
+    if (this.submitResult) {
             this.inputValues.push(this.state.name);
             this.inputValues.push(this.inputRefStr.current.value);
             this.inputValues.push(this.inputRefHp.current.value);
