@@ -2,13 +2,6 @@ import React from "react";
 import Bohater from './../bohater';
 
 
-const wordPattern = /^([a-zA-Z0-9])+$/;
-
-//var submitResult=false;
-
-
-
-
 
 class Form extends React.Component {
     constructor(props) {
@@ -24,17 +17,17 @@ class Form extends React.Component {
         this.inputRefHp = React.createRef();
         this.inputRefSpeed = React.createRef();
         this.submitResult = false;
-        this.inputValues=[];
-        this.name="";
+        this.inputValues = [];
+        this.name = "";
 
-                localStorage.clear();
+        localStorage.clear();
     };
 
 
 
-    CheckValidity(event,element, pattern, customMessage) {
-        if (/*element.value*/this.state.name.match(pattern) == null) {
-             element.setCustomValidity(customMessage);
+    CheckValidity(event, element, pattern, customMessage) {
+        if (this.state.name.match(pattern) == null) {
+            element.setCustomValidity(customMessage);
             element.reportValidity();
             return false;
         }
@@ -48,21 +41,18 @@ class Form extends React.Component {
 
     handleChange(e) {
         this.setState({ name: e.target.value });
-//        this.name=e.target.value;
     }
 
     // 
     handleSubmit(e) {
         e.preventDefault();
-        this.submitResult=true;
-        if (this.state.name==="") this.submitResult=false;
-//        this.submitResult = this.CheckValidity(e,this.inputRefName.current , wordPattern, "Pole może zawierać tylko litery");
-                this.setState({
-           validity: this.submitResult
-       });
+        this.submitResult = true;
+        if (this.state.name === "") this.submitResult = false;
+        this.setState({
+            validity: this.submitResult
+        });
 
-//        if (this.submitResult) {
-    if (this.state.validity) {
+        if (this.state.validity) {
             this.inputValues.push(this.state.name);
             this.inputValues.push(this.inputRefStr.current.value);
             this.inputValues.push(this.inputRefHp.current.value);
@@ -98,39 +88,20 @@ class Form extends React.Component {
                         <input name="send" type="submit" />
                     </div>
                 </form>
-                 <p>validity: {this.inputValues.toString()}</p> 
-                 {console.log('linia104',this.inputValues)}
-                 <Bohater  inputs={this.inputValues} /> 
-                 {/* {this.submitResult = false} */}
-                 {this.inputValues=[]}
+                <Bohater inputs={this.inputValues} />
+                {this.inputValues = []}
             </div>
         )
-
-
-
     }
 
 }
 
 function generateRandom() { //between 0 and 100
-    //    const min=0;
     const max = 100;
     return Math.floor(max * Math.random());
 
 }
 
-
-
-
-// nameValidation = (fieldName, fieldValue) => {
-//     if (fieldValue.trim() === '') {
-//       return {fieldName} +"nie może byc puste";
-//     }
-//     if (/[^a-zA-Z -]/.test(fieldValue)) {
-//       return "Imię może zawierać tylko litery";
-//     }
-//     return null;
-//   };
 
 
 export default Form;
